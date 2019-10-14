@@ -1,6 +1,6 @@
 import React from 'react';
 import DrinkComponent from './DrinkComponent'
-import 'Drink.css'
+import './Drink.css'
 
 const Drink = props => {
   const {
