@@ -1,6 +1,5 @@
 import React from 'react';
 import DrinkComponent from './DrinkComponent'
-import './Drink.css'
 
 const Drink = props => {
   const {
@@ -13,16 +12,16 @@ const Drink = props => {
       drink_components
   } = props;
   return (
-      <div className="drink-container">
+      <div>
         <div>
-          <h2 className="drink-name">{name}</h2>
-          <span className="drink-price">{cost}</span>
+          <h2>{name}</h2>
+          <span>{cost}</span>
         </div>
-        <div className="drink-desc">{blurb}</div>
-        <div className="drink-info">
-          <span className="ounces">Ounces</span>
-          <span className="ingredients">Ingredients</span>
-          <span className="millilters">mL Alcohol</span>
+        <div>{blurb}</div>
+        <div>
+          <span>Ounces</span>
+          <span>Ingredients</span>
+          <span>mL Alcohol</span>
         </div>
         {drink_components.map((drinkComponent, i) => <DrinkComponent key={i} {...drinkComponent} />)}
       </div>

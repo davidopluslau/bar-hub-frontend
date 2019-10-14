@@ -12,9 +12,9 @@ const DrinkComponent = props => {
   } = props;
   return (
       <div>
-        <span className="ounces">{display_units}</span>
-        <span className="ingredients">{component_name}</span>
-        <span className="milliliters">{alcohol_contribution}</span>
+        <span>{display_units}</span>
+        <span>{component_name}</span>
+        <span>{alcohol_contribution}</span>
       </div>
   )
 };
