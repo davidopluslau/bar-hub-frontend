@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './octopus_hex.svg';
 import './App.css';
 import Menu from './components/Menu';
+import DrinkCreate from './components/DrinkCreate'
 
 function App() {
   return (
