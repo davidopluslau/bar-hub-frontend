@@ -55,7 +55,26 @@ class App extends React.Component {
       selectedDrink: updatedDrinkData
     }))
   }
+
+  deleteDrink = async (id) => {
+    const destroyThisDrink = await destroyDrink(id)
+    console.log(destroyThisDrink)
+      this.setState(prevState => ({
+        drinks: prevState.drinks.filter(drink => drink.id !== parseInt(id)),
+        selectedDrink: null
+      }))
+  }
   
+  handleFormChange = (event) => {
+    const { name, value } = event.target
+    this.setState(prevState => ({
+      bookForm: {
+        ...prevState.drinkForm,
+        [name]: value
+      }
+    }))
+}
+
 
   mountEditForm = async (id) => {
     const drinks = await readAllDrinks()
@@ -65,6 +84,15 @@ class App extends React.Component {
       drinkForm: drink
     })
   }
+
+  selectDrink = (drink) => {
+    this.setState({
+      selectedDrink: drink
+    })
+  }
+
+
+  
   
 render() {
   return (
