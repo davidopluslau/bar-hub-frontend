@@ -68,7 +68,7 @@ class App extends React.Component {
   handleFormChange = (event) => {
     const { name, value } = event.target
     this.setState(prevState => ({
-      bookForm: {
+      drinkForm: {
         ...prevState.drinkForm,
         [name]: value
       }
@@ -91,7 +91,16 @@ class App extends React.Component {
     })
   }
 
-
+  drink = () => {
+    const drink = this.state.selectedDrink
+    return (
+      <div className="drink-page">
+        <h1>{drink.name}</h1>
+        <h3>{drink.price}</h3>
+        <p>{drink.description}</p>
+      </div>
+    )
+  }
   
   
 render() {
@@ -100,6 +109,10 @@ render() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Menu/>
+        <DrinkCreate
+            handleFormChange={this.handleFormChange}
+            drinkForm={this.state.drinkForm}
+            newDrink={this.newDrink} />
       </header>
     </div>
     );
