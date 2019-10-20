@@ -25,17 +25,18 @@ class Drink extends React.Component {
 
   return (
       <div className="drink-container">
-        <div>
+        <div className="drink-header">
           <h2 className="drink-name">{name}</h2>
           <span className="drink-price">{cost}</span>
         </div>
         <div className="drink-desc">{blurb}</div>
         <div className="drink-info">
-          <span className="ounces">Ounces</span>
-          <span className="ingredients">Ingredients</span>
-          <span className="millilters">mL Alcohol</span>
+          <div className="ounces">Ounces</div>
+          <div className="ingredients">Ingredients</div>
+          <div className="milliliters">mL Alcohol</div>
         </div>
-        {drink_components.map((drinkComponent, i) => <DrinkComponent key={i} {...drinkComponent} />)}
+        <div className="drink-components">{drink_components.map((drinkComponent, i) => <DrinkComponent key={i} {...drinkComponent} />)}</div>
+       
         {this.state.isEdit ?
                 <DrinkEdit
                   handleFormChange={this.props.handleFormChange}

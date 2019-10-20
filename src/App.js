@@ -17,38 +17,40 @@ class App extends React.Component {
     selectedDrink: null,
     drinkForm: {
       name: "",
-      price: "",
-      description: "",
-      ounces: "",
-      ingredients: "",
-      milliliters: ""
+      version: "",
+      cost: "",
+      alcohol: "",
+      blurb: "",
+      is_pour: ""
     }
   }
 
   getDrinks = async () => {
     const data = await readAllDrinks()
     this.setState({
-      drinks: data.drinks
+      drink: data.drink
     })
   }
   newDrink = async (event) => {
     event.preventDefault()
     const drink = await createDrink(this.state.drinkForm)
     this.setState(prevState => ({
-      drink: [...prevState.drinks, drink],
+      drink: [...prevState.drink, drink],
       drinkForm: {
         name: "",
-        price: "",
-        description: "",
-        ounces: "",
-        ingredients: "",
-        milliliters: ""
+        version: "",
+        cost: "",
+        alcohol: "",
+        blurb: "",
+        is_pour: ""
       }
     }))
   }
 
   editDrink = async () => {
-    const { drinkForm } = this.state
+    const {
+      drinkForm
+    } = this.state
     const updatedDrinkData = await updateDrink(drinkForm.id, drinkForm)
     this.setState(prevState => ({
       drinks: prevState.drinks.map(drink => drink.id === drinkForm.id ? drinkForm : drink),
@@ -59,21 +61,28 @@ class App extends React.Component {
   deleteDrink = async (id) => {
     const destroyThisDrink = await destroyDrink(id)
     console.log(destroyThisDrink)
-      this.setState(prevState => ({
-        drinks: prevState.drinks.filter(drink => drink.id !== parseInt(id)),
-        selectedDrink: null
-      }))
+    this.setState(prevState => ({
+      drinks: prevState.drinks.filter(drink => drink.id !== parseInt(id)),
+      selectedDrink: null
+    }))
   }
-  
+
   handleFormChange = (event) => {
-    const { name, value } = event.target
+    const {
+      name,
+      value
+    } = event.target
     this.setState(prevState => ({
       drinkForm: {
         ...prevState.drinkForm,
         [name]: value
       }
     }))
-}
+  }
+
+  handleSubmit = (event) => {
+    console.log("being submitted")
+  }
 
 
   mountEditForm = async (id) => {
@@ -93,28 +102,35 @@ class App extends React.Component {
 
   drink = () => {
     const drink = this.state.selectedDrink
-    return (
-      <div className="drink-page">
-        <h1>{drink.name}</h1>
-        <h3>{drink.price}</h3>
-        <p>{drink.description}</p>
-      </div>
+    return ( <div className = "drink-page">
+      <h1> {drink.name} </h1>  
+      <h3> {drink.price} </h3>  
+      <p> {drink.description} </p>  </div >
     )
   }
-  
-  
-render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Menu/>
-        <DrinkCreate
-            handleFormChange={this.handleFormChange}
-            drinkForm={this.state.drinkForm}
-            newDrink={this.newDrink} />
-      </header>
-    </div>
+
+
+  render() {
+    return ( <div className = "App">
+      <header className = "App-header" >
+      <img src = {logo}
+      className = "App-logo"
+      alt = "logo" />
+      <Menu/>
+      <DrinkCreate handleFormChange = {
+        this.handleFormChange
+      }
+      drinkForm = {
+        this.state.drinkForm
+      }
+      handleSubmit = {
+        this.handleSubmit
+      }
+      newDrink = {
+        this.newDrink
+      }
+      /> </header> 
+      </div>
     );
   }
 }

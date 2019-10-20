@@ -1,12 +1,14 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:8080/'
+const baseUrl = 'http://localhost:8080'
 
 const api = axios.create({
   baseURL: baseUrl
 })
 
+
 const createDrink = async (data) => {
   const resp = await api.post('/drink', { drink: data })
+  console.log(resp.data)
   return resp.data
 }
 
