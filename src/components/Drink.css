@@ -7,6 +7,7 @@ body{
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
+    flex-wrap: wrap;
 }
 
 .drink-name{
@@ -23,19 +24,34 @@ body{
     font-size: 20px;
 }
 
-.drink-info {
-    padding: 5px;
-    margin: 5px;
+.drink-info{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
-.ounces {
-    padding: 5px;
-    margin: 5px;
+div.ounces{
+    padding: 10px;
 }
 
-.ingredients {
-    padding: 5px;
-    margin: 5px;
+div.ingredients{
+    padding: 10px;
+}
+
+div.milliliters{
+    padding: 10px;
+}
+
+span.ounces{
+    padding: 10px;
+}
+
+span.ingredients{
+    padding: 10px;
+}
+
+span.milliliters{
+    padding: 10px;
 }
 
 .millilters {
