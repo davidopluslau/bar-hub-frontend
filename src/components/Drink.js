@@ -1,8 +1,18 @@
 import React from 'react';
+import DrinkEdit from './DrinkEdit'
 import DrinkComponent from './DrinkComponent'
 import './Drink.css'
 
-const Drink = props => {
+class Drink extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isEdit: false
+    }
+  }
+
+
+ render() {
   const {
     name,
     version,
@@ -11,22 +21,40 @@ const Drink = props => {
       blurb,
       is_pour,
       drink_components
-  } = props;
+  } = this.props;
+
   return (
       <div className="drink-container">
-        <div>
+        <div className="drink-header">
           <h2 className="drink-name">{name}</h2>
           <span className="drink-price">{cost}</span>
         </div>
         <div className="drink-desc">{blurb}</div>
         <div className="drink-info">
-          <span className="ounces">Ounces</span>
-          <span className="ingredients">Ingredients</span>
-          <span className="millilters">mL Alcohol</span>
+          <div className="ounces">Ounces</div>
+          <div className="ingredients">Ingredients</div>
+          <div className="milliliters">mL Alcohol</div>
         </div>
-        {drink_components.map((drinkComponent, i) => <DrinkComponent key={i} {...drinkComponent} />)}
-      </div>
-  )
-};
-
+        <div className="drink-components">{drink_components.map((drinkComponent, i) => <DrinkComponent key={i} {...drinkComponent} />)}</div>
+       
+        {this.state.isEdit ?
+                <DrinkEdit
+                  handleFormChange={this.props.handleFormChange}
+                  handleSubmit={(event) => {
+                    event.preventDefault();
+                    this.props.editDrink();
+                    this.setState({ isEdit: false })
+                  }}
+                  drinkForm={this.props.drinkForm} />
+              :
+              <>
+                <button onClick={() => {
+                  this.setState({
+                    isEdit: true
+                  })
+                }}>Edit</button>
+              </>
+            }
+          </div>)}
+        }   
 export default Drink;
